@@ -12,4 +12,25 @@ export const createPost = async (req, res) => {
     }catch (error){
         res.status(500).json(error);
     }
-}
+};
+
+//Get All Post
+export const getAllPost = async (req, res) => {
+    try{
+        const allPost = await PostModel.find();
+        res.status(200).json(allPost);
+    }catch (e) {
+        res.status(500).json(e);
+    }
+};
+
+//Get a Post
+export const getPost = async (req, res) => {
+    const id = req.params.id;
+    try{
+        const post = await PostModel.findById(id);
+        res.status(200).json(post);
+    }catch (e) {
+        res.status(500).json(e);
+    }
+};
