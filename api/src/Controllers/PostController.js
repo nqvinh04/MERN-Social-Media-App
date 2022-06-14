@@ -34,3 +34,15 @@ export const getPost = async (req, res) => {
         res.status(500).json(e);
     }
 };
+
+// Update a post
+export const updatePost = async (req, res) => {
+    const postId = req.params.id;
+    const {userId} = req.body
+    try{
+        const post = await PostModel.findByIdAndUpdate(postId);
+        res.status(200).json(post)
+    }catch (e) {
+        res.status(500).json(e);
+    }
+}
