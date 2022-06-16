@@ -4,7 +4,7 @@ const Home = () => {
     return (
         <div className="Home">
             <div className="profileSide"></div>
-            <div className="postSide"></div>
+            <div className=""></div>
             <div className="rightSide"></div>
         </div>
     )
