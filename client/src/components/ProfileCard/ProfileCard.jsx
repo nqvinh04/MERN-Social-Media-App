@@ -1,7 +1,7 @@
 import React from "react";
 import Cover from "../../img/cover.jpg";
 import Profile from "../../img/profileImg.jpg"
-import "./profileCard.css"
+import "./ProfileCard.css"
 
 const ProfileCard = () => {
     return (
@@ -31,6 +31,10 @@ const ProfileCard = () => {
                 </div>
                 <hr/>
             </div>
+
+            <span>
+                My Profile
+            </span>
         </div>
     )
 }
