@@ -1,6 +1,7 @@
 import React from "react";
 import LogoSearch from "../logoSearch/LogoSearch";
 import ProfileCard from "../profileCard/profileCard";
+import "./ProfileSide.css";
 
 const ProfileSide = () => {
     return (
