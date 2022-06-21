@@ -15,7 +15,7 @@ const PostDetail = ({data}) => {
                 <img src={Share} alt="" />
             </div>
 
-            <span>{data.likes} likes</span>
+            <span style={{ color: "rgba(36, 45, 73, 0.65)", fontSize: "12px" }}>{data.likes} likes</span>
 
             <div className="detail">
                 <span><b>{data.name}</b></span>

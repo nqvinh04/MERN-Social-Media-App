@@ -8,31 +8,33 @@ const InfoCard = () => {
         <div className="InfoCard">
             <div className="infoHead">
                 <h4>Your Info</h4>
-                <UilPen/>
+                <div>
+                    <UilPen width='2rem' height='1.2rem'/>
+                </div>
             </div>
 
             <div className="info">
                 <span>
-                    <b>Status in</b>
+                    <b>Status in </b>
                 </span>
                 <span>Relationship</span>
             </div>
 
             <div className="info">
                 <span>
-                    <b>Lives in</b>
+                    <b>Lives in </b>
                 </span>
                 <span>Multan</span>
             </div>
 
             <div className="info">
                 <span>
-                    <b>Works at</b>
+                    <b>Works at </b>
                 </span>
                 <span>Duy Tan - Viet Nam</span>
             </div>
 
-            <button className="button lg-button">Logout</button>
+            <button className="button logout-button">Logout</button>
         </div>
     )
 }

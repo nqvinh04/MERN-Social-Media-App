@@ -7,7 +7,7 @@ import FollowersCard from "../FollowersCard/FollowersCard";
 
 const ProfileLeft = () => {
     return(
-        <div className='ProfileLeft'>
+        <div className='ProfileSide'>
             <LogoSearch/>
             <InfoCard/>
             <FollowersCard/>
