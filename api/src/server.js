@@ -13,7 +13,7 @@ const app = express();
 //Middleware
 app.use(bodyParser.json({ limit: '20gb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '20gb', extended: true }));
-
+app.use(cors());
 dotenv.config()
 
 mongoose.connect(
@@ -29,7 +29,7 @@ mongoose.connect(
 })
 
 //usage of routes
-app.use(cors());
+
 app.use(express.json());
 app.use('/auth', AuthRoute);
 app.use('/user', UserRoute);

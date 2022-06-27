@@ -1,73 +1,22 @@
 import React, {useState} from "react";
 import './Auth.css';
 import Logo from '../../img/logo.png';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {logIn, signUp} from "../../actions/AuthActions";
-
-// function SignUp(stateAuth){
-//     console.log(11111, stateAuth)
-//     return(
-//         <div className="a-right">
-//             <form className="infoForm authForm">
-//                 <h3>{stateAuth.isSignUp ? "Sign up" : "Log In"}</h3>
-//                 <div>
-//                     <input
-//                         type="text"
-//                         placeholder='First Name'
-//                         className='infoInput'
-//                         name='firstname'
-//                     />
-//                     <input
-//                         type="text"
-//                         placeholder='Last Name'
-//                         className='infoInput'
-//                         name='lastname'
-//                     />
-//                 </div>
-//
-//                 <div>
-//                     <input
-//                         type="text"
-//                         placeholder='Usernames'
-//                         className='infoInput'
-//                         name='username'
-//                     />
-//                 </div>
-//
-//                 <div>
-//                     <input
-//                         type="text"
-//                         placeholder='Password'
-//                         className='infoInput'
-//                         name='password'
-//                     />
-//                     <input
-//                         type="text"
-//                         placeholder='Confirm Password'
-//                         className='infoInput'
-//                         name='Confirm Password'
-//                     />
-//                 </div>
-//                 <div>
-//                     <span>Already have an account. Login!</span>
-//                 </div>
-//                 <button className="button infoButton"
-//                         type="submit">Signup</button>
-//             </form>
-//         </div>
-//     )
-// }
+import authReducer from "../../reducers/AuthReducer";
 
 const Auth = () => {
-    const [isSignUp, setIsSignUp] = useState(true);
-    const dispatch = useDispatch();
-    const [data, setData] = useState({
+    const initialState = {
         firstname: "",
         lastname: "",
         password: "",
         confirmpass: "",
         username: ""
-    });
+    }
+    const dispatch = useDispatch();
+    const loading = useSelector((state) => state.auth.loading)
+    const [isSignUp, setIsSignUp] = useState(true);
+    const [data, setData] = useState(initialState);
     const [confirmPass, setConfirmPass] = useState(true);
 
     const handleChange = (e) => {
@@ -188,8 +137,10 @@ const Auth = () => {
                         </span>
                     </div>
                     <button className="button infoButton"
-                            type="submit">
-                        {isSignUp ? "Register" : "Log In"}
+                            type="submit"
+                            disabled={loading}
+                    >
+                        {loading ? "loading..." : isSignUp ? "Register" : "Log In"}
                     </button>
                 </form>
             </div>
