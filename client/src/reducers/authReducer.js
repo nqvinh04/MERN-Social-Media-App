@@ -16,7 +16,9 @@ const authReducer = (state = initState, action) => {
         case "AUTH_SUCCESS":
             return {
                 ...state,
-                authData:
+                authData: action.data,
+                loading: false
             }
+        case ""
     }
 }
