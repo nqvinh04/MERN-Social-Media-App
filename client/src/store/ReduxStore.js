@@ -1,31 +1,30 @@
 import {
     legacy_createStore as createStore,
     applyMiddleware,
-    compose
+    compose,
 } from "redux";
-import thunk  from "redux-thunk";
+import thunk from "redux-thunk";
 import { reducers } from "../reducers";
 
-function saveToLocalStorage(store){
-    try{
+function saveToLocalStorage(store) {
+    try {
         const serializedStore = JSON.stringify(store);
         window.localStorage.setItem('store', serializedStore);
-    } catch (e) {
+    } catch(e) {
         console.log(e);
     }
 }
 
-function loadFromLocalStorage(){
+function loadFromLocalStorage() {
     try {
-       const serializedStore = window.localStorage.getItem('store');
-       if(serializedStore === null) return undefined;
-       return JSON.parse(serializedStore);
-    } catch (e) {
+        const serializedStore = window.localStorage.getItem('store');
+        if(serializedStore === null) return undefined;
+        return JSON.parse(serializedStore);
+    } catch(e) {
         console.log(e);
         return undefined;
     }
 }
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistedState = loadFromLocalStorage();
 

@@ -6,15 +6,25 @@ import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilLocationPoint } from "@iconscout/react-unicons";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
+import {useSelector} from "react-redux";
 
 const PostShare = () => {
     const [image, setImage] = useState(null);
     const imageRef = useRef();
+    const {user} = useSelector((state) => state)
 
     const onImageChange = (event) => {
         if(event.target.files && event.target.files[0]){
             let img = event.target.files[0];
             setImage(img);
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const newPost = {
+
         }
     }
 
@@ -42,7 +52,8 @@ const PostShare = () => {
                         <UilSchedule/>
                         Schedule
                     </div>
-                    <button className="button ps-button">
+                    <button className="button ps-button"
+                    >
                         Share
                     </button>
                     <div style={{display: 'none'}}>

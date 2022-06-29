@@ -6,7 +6,10 @@ import {Routes, Route, Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 function App() {
-    const user = useSelector((state) => state.authReducer.authData)
+    const user = useSelector(
+        (state) => state.auth.authData
+    )
+    console.log(654321, user)
     return (
         <div className="App">
             <div className="blur" style={{top: '-18%', right: '0'}}>Home</div>
@@ -24,6 +27,9 @@ function App() {
                     path="/auth"
                     element={user ? <Navigate to="../home" /> : <Auth />}
                 />
+                {/*<Route path="/" element={<Home/>}/>*/}
+                {/*<Route path="/login" element={<Auth/>}/>*/}
+                {/*<Route path="/register" element={<Auth/>}/>*/}
             </Routes>
             {/*<Home/>*/}
             {/*<Profile/>*/}
