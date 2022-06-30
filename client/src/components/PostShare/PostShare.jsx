@@ -11,8 +11,8 @@ import {useSelector} from "react-redux";
 const PostShare = () => {
     const [image, setImage] = useState(null);
     const imageRef = useRef();
-    const {user} = useSelector((state) => state)
-
+    const desc = useRef();
+    const {user} = useSelector((state) => state.auth.authData)
     const onImageChange = (event) => {
         if(event.target.files && event.target.files[0]){
             let img = event.target.files[0];
@@ -24,7 +24,17 @@ const PostShare = () => {
         e.preventDefault();
 
         const newPost = {
+            userId: user._id,
+            desc: desc.current.value
+        }
 
+        if(image) {
+            const data = new FormData();
+            const filename = Date.now() + image.name;
+            data.append("name", filename);
+            data.append("file", image);
+            newPost.image = filename;
+            console.log(1111, newPost);
         }
     }
 
@@ -32,7 +42,10 @@ const PostShare = () => {
         <div className="PostShare">
             <img src={ProfileImage} alt="" />
             <div>
-                <input type="text" placeholder="What's happening" />
+                <input
+                    ref={desc}
+                    type="text"
+                    placeholder="What's happening" />
                 <div className="postOptions">
                     <div className="option" style={{color: "#4CB256"}}
                          onClick={() => imageRef.current.click()}
@@ -53,6 +66,7 @@ const PostShare = () => {
                         Schedule
                     </div>
                     <button className="button ps-button"
+                            onClick={handleSubmit}
                     >
                         Share
                     </button>
