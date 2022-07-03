@@ -6,18 +6,26 @@ import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilLocationPoint } from "@iconscout/react-unicons";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {uploadAction, uploadPost} from "../../actions/uploadAction";
 
 const PostShare = () => {
+    const dispatch = useDispatch();
     const [image, setImage] = useState(null);
     const imageRef = useRef();
     const desc = useRef();
     const {user} = useSelector((state) => state.auth.authData)
+    const loading = useSelector((state) => state.post.uploading)
     const onImageChange = (event) => {
         if(event.target.files && event.target.files[0]){
             let img = event.target.files[0];
             setImage(img);
         }
+    }
+
+    const reset = () => {
+        setImage(null);
+        desc.current.value=""
     }
 
     const handleSubmit = (e) => {
@@ -34,8 +42,15 @@ const PostShare = () => {
             data.append("name", filename);
             data.append("file", image);
             newPost.image = filename;
-            console.log(1111, newPost);
+            console.log("New Post UI", newPost);
+            try{
+                dispatch(uploadAction(data));
+            } catch (error) {
+                console.log(error);
+            }
         }
+        dispatch(uploadPost(newPost));
+        reset();
     }
 
     return(
@@ -67,8 +82,9 @@ const PostShare = () => {
                     </div>
                     <button className="button ps-button"
                             onClick={handleSubmit}
+                            disabled={loading}
                     >
-                        Share
+                        {loading ? "Uploading..." : "Share"}
                     </button>
                     <div style={{display: 'none'}}>
                         <input type="file"

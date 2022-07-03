@@ -3,7 +3,7 @@ import './Auth.css';
 import Logo from '../../img/logo.png';
 import {useDispatch, useSelector} from "react-redux";
 import {logIn, signUp} from "../../actions/AuthActions";
-import authReducer from "../../reducers/AuthReducer";
+import authReducer from "../../reducers/authReducer";
 
 const Auth = () => {
     const initialState = {
