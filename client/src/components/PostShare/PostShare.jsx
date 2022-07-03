@@ -14,44 +14,50 @@ const PostShare = () => {
     const [image, setImage] = useState(null);
     const imageRef = useRef();
     const desc = useRef();
-    const {user} = useSelector((state) => state.auth.authData)
-    const loading = useSelector((state) => state.post.uploading)
+    const {user} = useSelector((state) => state.auth.authData);
+    const loading = useSelector((state) => state.post.uploading);
+
+    // handle Image Change
     const onImageChange = (event) => {
         if(event.target.files && event.target.files[0]){
             let img = event.target.files[0];
             setImage(img);
         }
-    }
+    };
 
-    const reset = () => {
+    // Reset Post Share
+    const resetShare = () => {
         setImage(null);
-        desc.current.value=""
-    }
+        desc.current.value="";
+    };
 
-    const handleSubmit = (e) => {
+    // handle post upload
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
+        //post data
         const newPost = {
             userId: user._id,
-            desc: desc.current.value
-        }
+            desc: desc.current.value,
+        };
 
-        if(image) {
+        // if there is an image with post
+        if (image) {
             const data = new FormData();
-            const filename = Date.now() + image.name;
-            data.append("name", filename);
+            const fileName = Date.now() + image.name;
+            data.append("name", fileName);
             data.append("file", image);
-            newPost.image = filename;
+            newPost.image = fileName;
             console.log("New Post UI", newPost);
-            try{
+            try {
                 dispatch(uploadAction(data));
-            } catch (error) {
-                console.log(error);
+            } catch (err) {
+                console.log(err);
             }
         }
         dispatch(uploadPost(newPost));
-        reset();
-    }
+        resetShare();
+    };
 
     return(
         <div className="PostShare">
@@ -102,7 +108,7 @@ const PostShare = () => {
                 )}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default PostShare;

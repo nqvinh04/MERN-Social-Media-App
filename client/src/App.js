@@ -9,7 +9,7 @@ function App() {
     const user = useSelector(
         (state) => state.auth.authData
     )
-    console.log(654321, user)
+
     return (
         <div className="App">
             <div className="blur" style={{top: '-18%', right: '0'}}>Home</div>
