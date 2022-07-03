@@ -16,7 +16,7 @@ const PostShare = () => {
     const desc = useRef();
     const {user} = useSelector((state) => state.auth.authData);
     const loading = useSelector((state) => state.post.uploading);
-
+    console.log(123456, loading)
     // handle Image Change
     const onImageChange = (event) => {
         if(event.target.files && event.target.files[0]){
@@ -88,9 +88,10 @@ const PostShare = () => {
                     </div>
                     <button className="button ps-button"
                             onClick={handleSubmit}
-                            disabled={loading}
+                            // disabled={loading}
                     >
-                        {loading ? "Uploading..." : "Share"}
+                        {/*{loading ? "Uploading..." : "Share"}*/}
+                        Share
                     </button>
                     <div style={{display: 'none'}}>
                         <input type="file"
