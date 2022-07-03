@@ -12,7 +12,7 @@ import UploadRoute from "./Routes/UploadRoute.js";
 const app = express();
 
 // to server images for public
-app.use(express.static('public'))
+app.use(express.static('src/public'))
 app.use('/images', express.static('images'))
 
 //Middleware

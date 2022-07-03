@@ -11,6 +11,7 @@ const PostDetail = ({data}) => {
     const {user} = useSelector((state) => state.auth.authData);
     const [liked, setLiked] = useState(data.likes.includes(user._id));
     const [likes, setLikes] = useState(data.likes.length)
+    const serverPublic = 'http://localhost:5001/images/'
 
     const handleLike = () => {
         setLiked((prev)=>!prev)
@@ -24,7 +25,7 @@ const PostDetail = ({data}) => {
                 <span><b>{data.name}</b></span>
                 <span>{data.desc}</span>
             </div>
-            <img src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""} alt="img" />
+            <img src={data.image ? serverPublic + data.image : ""} alt="img" />
             <div className="postReact">
                 <img src={liked ? Heart : NotLike}
                      alt=""
