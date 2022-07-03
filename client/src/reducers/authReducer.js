@@ -7,7 +7,6 @@ const  initState = {
 }
 
 const authReducer = (state = initState, action) => {
-    console.log(111, action.type)
     switch (action.type){
         case "AUTH_REQUEST":
             return {
@@ -29,9 +28,18 @@ const authReducer = (state = initState, action) => {
                 loading: false,
                 error: true
             };
+        case "LOG_OUT":
+            localStorage.clear();
+            return {
+                ...state,
+                authData: null,
+                loading: false,
+                error: false,
+                updateLoading: false
+            }
         default:
             return state;
     }
-}
+};
 
 export default authReducer;

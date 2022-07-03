@@ -1,7 +1,30 @@
 import { Modal, useMantineTheme } from '@mantine/core';
+import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
 
-function ProfileModal({modalOpened, setModalOpened}) {
+function ProfileModal({modalOpened, setModalOpened, data}) {
     const theme = useMantineTheme();
+    const {password, ...other} = data;
+    const [formData, setFormData] = useState(other);
+    const [profileImage, setProfileImage] = useState(null);
+    const [coverImage, setCoverImage] = useState(null);
+    const dispatch = useDispatch();
+    const param = useParams();
+    const {user} = useSelector((state) => state.auth.authData);
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    };
+
+    const onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]){
+            let img = event.target.fi
+        }
+    }
 
     return (
         <Modal
@@ -21,12 +44,16 @@ function ProfileModal({modalOpened, setModalOpened}) {
                         className="infoInput"
                         name="FirstName"
                         placeholder="First Name"
+                        onChange={handleChange}
+                        value={formData.firstname}
                     />
                     <input
                         type="text"
                         className="infoInput"
                         name="LastName"
                         placeholder="Last Name"
+                        onChange={handleChange}
+                        value={formData.lastname}
                     />
                 </div>
 
@@ -34,8 +61,8 @@ function ProfileModal({modalOpened, setModalOpened}) {
                     <input
                         type="text"
                         className="infoInput"
-                        name="FirstName"
-                        placeholder="First Name"
+                        name="worksAt"
+                        placeholder="Works At"
                     />
                 </div>
 
@@ -43,15 +70,19 @@ function ProfileModal({modalOpened, setModalOpened}) {
                     <input
                         type="text"
                         className="infoInput"
-                        name="LivesIn"
+                        name="livesin"
                         placeholder="Lives In"
+                        onChange={handleChange}
+                        value={formData.livesin}
                     />
 
                     <input
                         type="text"
                         className="infoInput"
-                        name="Country"
+                        name="country"
                         placeholder="Country"
+                        onChange={handleChange}
+                        value={formData.country}
                     />
                 </div>
 
@@ -59,19 +90,25 @@ function ProfileModal({modalOpened, setModalOpened}) {
                     <input
                         type="text"
                         className="infoInput"
-                        name="RelationShipStatus"
+                        name="relationShipStatus"
                         placeholder="RelationShip Status"
+                        onChange={handleChange}
+                        value={formData.relationship}
                     />
                 </div>
 
                 <div>
                     Profile Image
-                    <input type="file" name='profileImg'/>
+                    <input type="file" name='profileImage'/>
                     Cover Image
-                    <input type="file" name='coverImg'/>
+                    <input type="file" name='coverImage'/>
                 </div>
 
-                <button className="button infoButton">Update</button>
+                <button
+                    className="button infoButton"
+                >
+                    Update
+                </button>
             </form>
         </Modal>
     );
