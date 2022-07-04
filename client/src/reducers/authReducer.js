@@ -3,7 +3,7 @@ const  initState = {
     authData: null,
     loading: false,
     error: false,
-    // updateLoading: false
+    updateLoading: false
 }
 
 const authReducer = (state = initState, action) => {
@@ -28,6 +28,26 @@ const authReducer = (state = initState, action) => {
                 loading: false,
                 error: true
             };
+        case "UPDATE_REQUEST":
+            return {
+                ...state,
+                updateLoading: true,
+                error: false
+            }
+        case "UPDATE_SUCCESS":
+            localStorage.setItem("profile", JSON.stringify({...action?.data}));
+            return {
+                ...state,
+                authData: action.data,
+                updateLoading: false,
+                error: false
+            }
+        case "UPDATE_FAIL":
+            return {
+                ...state,
+                updateLoading: false,
+                error: true
+            }
         case "LOG_OUT":
             localStorage.clear();
             return {

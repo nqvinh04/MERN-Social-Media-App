@@ -2,6 +2,9 @@ import { Modal, useMantineTheme } from '@mantine/core';
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
+import {upload} from "@testing-library/user-event/dist/upload";
+import {uploadAction} from "../../actions/uploadAction";
+import {updateUser} from "../../actions/userAction";
 
 function ProfileModal({modalOpened, setModalOpened, data}) {
     const theme = useMantineTheme();
@@ -36,7 +39,14 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
             data.append("name", fileName);
             data.append("file", profileImage);
             UserData.profilePicture = fileName;
+            try{
+                dispatch(uploadAction(data));
+            } catch (error) {
+                console.log(error);
+            }
         }
+        dispatch(updateUser(param.id, UserData));
+        setModalOpened(false);
     };
 
     return (
