@@ -22,9 +22,22 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
 
     const onImageChange = (event) => {
         if (event.target.files && event.target.files[0]){
-            let img = event.target.fi
+            let img = event.target.files[0];
+            event.target.name === "profileImage" ? setProfileImage(img) : setCoverImage(img)
         }
-    }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let UserData = formData;
+        if (profileImage) {
+            const data = new FormData();
+            const fileName = Date.now() + profileImage.name;
+            data.append("name", fileName);
+            data.append("file", profileImage);
+            UserData.profilePicture = fileName;
+        }
+    };
 
     return (
         <Modal
@@ -99,13 +112,14 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
 
                 <div>
                     Profile Image
-                    <input type="file" name='profileImage'/>
+                    <input type="file" name='profileImage' onChange={onImageChange} />
                     Cover Image
-                    <input type="file" name='coverImage'/>
+                    <input type="file" name='coverImage' onChange={onImageChange}/>
                 </div>
 
                 <button
                     className="button infoButton"
+                    onClick={handleSubmit}
                 >
                     Update
                 </button>
