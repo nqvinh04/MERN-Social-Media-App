@@ -7,7 +7,8 @@ import {Link} from "react-router-dom";
 
 const ProfileCard = ({location}) => {
     const {user} = useSelector((state)=>state.auth.authData);
-    const posts = useSelector((state)=>state.post.posts.data);
+    // const posts = useSelector((state)=>state.post.posts.data);
+    const posts = useSelector((state)=>state.post);
     console.log(54321, posts)
     const serverPublic = 'http://localhost:5001/images/';
 

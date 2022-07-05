@@ -8,7 +8,7 @@ const  initState = {
 const postReducer = (state = initState, action) => {
     switch (action.type){
         //Get All Post
-        case "GET_ALL_POST_SUCCESS":
+        case "GET_ALL_POST":
             return {
                 ...state,
                 posts: action.data,

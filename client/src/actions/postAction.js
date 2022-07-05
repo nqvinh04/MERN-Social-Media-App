@@ -4,14 +4,9 @@ import {getAllPosts} from "../api/PostRequest";
 
 export const getAll = () => {
     return async (dispatch) => {
-        dispatch({type: "GET_ALL_POST_REQUEST"});
-        try{
-            const posts = await PostApi.getAllPosts();
-            dispatch({type: "GET_ALL_POST_SUCCESS", data: posts});
-        } catch (error) {
-            dispatch({type: "GET_ALL_POST_FAILURE"});
-            console.log(error)
-        }
+        const posts = await PostApi.getAllPosts();
+        console.log(11111, posts)
+        dispatch({type: "GET_ALL_POST", data: posts});
     }
 }
 
