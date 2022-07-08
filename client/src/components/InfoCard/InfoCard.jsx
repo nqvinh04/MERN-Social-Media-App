@@ -81,6 +81,6 @@ const InfoCard = () => {
             </button>
         </div>
     )
-}
+};
 
 export default InfoCard;

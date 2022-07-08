@@ -34,6 +34,6 @@ const RightSide = () => {
             </button>
         </div>
     )
-}
+};
 
 export default RightSide;

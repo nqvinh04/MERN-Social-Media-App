@@ -18,6 +18,6 @@ const TrendCard = () => {
             }
         </div>
     )
-}
+};
 
 export default TrendCard;

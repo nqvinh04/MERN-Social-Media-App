@@ -19,6 +19,6 @@ function ShareModal({ modalOpened, setModalOpened }) {
             <PostShare />
         </Modal>
     );
-}
+};
 
 export default ShareModal;

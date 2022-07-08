@@ -70,6 +70,6 @@ const ProfileCard = ({location}) => {
                 </span>}
         </div>
     )
-}
+};
 
 export default ProfileCard;

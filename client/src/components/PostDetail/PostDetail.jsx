@@ -38,6 +38,6 @@ const PostDetail = ({data}) => {
             <span style={{ color: "rgba(36, 45, 73, 0.65)", fontSize: "12px" }}>{likes} likes</span>
         </div>
     )
-}
+};
 
 export default PostDetail;

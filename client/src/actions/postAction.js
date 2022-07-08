@@ -8,7 +8,7 @@ export const getAll = () => {
         console.log(11111, posts)
         dispatch({type: "GET_ALL_POST", data: posts});
     }
-}
+};
 
 export const getTimelinePosts = (id) => {
     return async (dispatch) => {
@@ -21,4 +21,4 @@ export const getTimelinePosts = (id) => {
             console.log(error)
         }
     }
-}
+};

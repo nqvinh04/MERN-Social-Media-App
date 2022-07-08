@@ -7,7 +7,7 @@ export const uploadAction = (formData) => async(dispatch) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const uploadPost = (formData) => async(dispatch) => {
     dispatch({type: "UPLOAD_REQUEST"})
@@ -17,4 +17,4 @@ export const uploadPost = (formData) => async(dispatch) => {
     } catch (error) {
         dispatch({type: "UPLOAD_FAILURE"})
     }
-}
+};

@@ -11,6 +11,6 @@ const PostSide = () => {
             <Posts/>
         </div>
     )
-}
+};
 
 export default PostSide;

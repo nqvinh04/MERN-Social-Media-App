@@ -136,6 +136,6 @@ function ProfileModal({modalOpened, setModalOpened, data}) {
             </form>
         </Modal>
     );
-}
+};
 
 export default ProfileModal;

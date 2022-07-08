@@ -15,6 +15,6 @@ const LogoSearch = () => {
             </div>
         </div>
     )
-}
+};
 
 export default LogoSearch;
