@@ -24,7 +24,7 @@ const postReducer = (state = initState, action) => {
         case "UPLOAD_SUCCESS":
             return {
                 ...state,
-                posts: [action.data, ...state.posts],
+                posts: [action.data, ...state],
                 uploading: false,
                 error: false
             }

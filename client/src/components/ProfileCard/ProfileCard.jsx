@@ -8,11 +8,11 @@ import {Link} from "react-router-dom";
 const ProfileCard = ({location}) => {
     const {user} = useSelector((state)=>state.auth.authData);
     // const posts = useSelector((state)=>state.post.posts.data);
-    const posts = useSelector((state)=>state.post);
+    const posts = useSelector((state)=>state.post.posts);
     console.log(54321, posts)
     const serverPublic = 'http://localhost:5001/images/';
 
-    const ProfilePage = false;
+    // const ProfilePage = false;
 
     return (
         <div className="ProfileCard">
@@ -52,7 +52,7 @@ const ProfileCard = ({location}) => {
                             </div>
                             <div className="follow">
                                 <span>
-                                    {posts.filter((post)=>post.userId === user._id).length}
+                                    {posts.data.filter((post)=>post.userId === user._id).length}
                                 </span>
                                 <span>Posts</span>
                             </div>

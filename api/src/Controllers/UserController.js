@@ -87,18 +87,20 @@ export const deleteUser = async (req, res) => {
 //Follow a User
 export const followUser = async (req, res) => {
     const id = req.params.id
-    const {currentUserId} = req.body
+    console.log(12345, req.body)
+    const {_id} = req.body
 
-    if (currentUserId === id){
+
+    if (_id === id){
         res.status(403).json("Action forbidden")
     }else{
         try{
             const followUser = await UserModel.findById(id)
-            const followingUser = await UserModel.findById(currentUserId)
+            const followingUser = await UserModel.findById(_id)
 
-            if(!followUser.followers.includes(currentUserId)){
+            if(!followUser.followers.includes(_id)){
                 await followUser.updateOne({
-                    $push: {followers: currentUserId}
+                    $push: {followers: _id}
                 })
                 await followingUser.updateOne({
                     $push: {followings: id}
@@ -115,20 +117,20 @@ export const followUser = async (req, res) => {
 
 export const UnFollowUser = async (req, res) => {
     const id = req.params.id;
-    const {currentUserId} = req.body;
+    const {_id} = req.body;
 
-    if (currentUserId === id){
+    if (_id === id){
         res.status(403).json("Action forbidden");
     }else{
         try{
-            const followUser = await UserModel.findById(id);
-            const followingUser = await UserModel.findById(currentUserId);
+            const unFollowUser = await UserModel.findById(id)
+            const unFollowingUser = await UserModel.findById(_id)
 
-            if(followUser.followers.includes(currentUserId)){
-                await followUser.updateOne({
-                    $pull: {followers: currentUserId}
+            if(unFollowUser.followers.includes(_id)){
+                await unFollowUser.updateOne({
+                    $pull: {followers: _id}
                 });
-                await followingUser.updateOne({
+                await unFollowingUser.updateOne({
                     $pull: {followings: id}
                 });
                 res.status(200).json("User Unfollowed!");
