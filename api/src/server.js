@@ -7,6 +7,7 @@ import AuthRoute from "./Routes/AuthRoute.js";
 import UserRoute from "./Routes/UserRoute.js";
 import PostRoute from "./Routes/PostRoute.js";
 import UploadRoute from "./Routes/UploadRoute.js";
+import ChatRouter from "./Routes/ChatRoute.js";
 
 // Routes
 const app = express();
@@ -40,6 +41,7 @@ app.use('/auth', AuthRoute);
 app.use('/user', UserRoute);
 app.use('/posts', PostRoute);
 app.use('/upload', UploadRoute);
+app.use('/chat', ChatRouter);
 
 app.listen(process.env.PORT || 5001, () => {
     console.log(`Port running ${process.env.PORT}`)
