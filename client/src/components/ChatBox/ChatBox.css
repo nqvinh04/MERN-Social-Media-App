@@ -10,3 +10,15 @@
     display: flex;
     flex-direction: column;
 }
+
+.chat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    overflow: scroll;
+}
+
+.message {
+    background: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);
+}
