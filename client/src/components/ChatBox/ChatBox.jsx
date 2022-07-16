@@ -51,6 +51,17 @@ const ChatBox = ({chat, currentUserId}) => {
         setNewMessage(newMessage);
     }
 
+    const handleSend = async(e) => {
+        e.preventDefault();
+        const message = {
+            senderId: currentUserId,
+            text: newMessage,
+            chatId: chat._id,
+        }
+        const receiverId = chat.member.find((id) => id === currentUserId);
+        // send message to sic
+    }
+
     return (
         <>
             <div className="ChatBox-container">
@@ -100,8 +111,8 @@ const ChatBox = ({chat, currentUserId}) => {
                                 value={newMessage}
                                 onChange={handleChange}
                             />
+                            <div className="send-button button" onClick={handleSend}>Send</div>
                         </div>
-                        <div className="send-button button" onClick={handleSend}>Send</div>
                     </>
                     ) : (
                         <span className="chatbox-empty-message">
