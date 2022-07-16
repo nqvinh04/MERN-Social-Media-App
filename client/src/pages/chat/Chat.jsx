@@ -4,11 +4,7 @@ import {useSelector} from "react-redux";
 import './Chat.css';
 import LogoSearch from "../../components/LogoSearch/LogoSearch";
 import Conversation from "../../components/Conversation/Conversation";
-import {Link} from "react-router-dom";
-import Home from "../../img/home.png";
-import {UilSetting} from "@iconscout/react-unicons";
-import Noti from "../../img/noti.png";
-import Comment from "../../img/comment.png";
+import NavIcons from "../../components/NavIcons/NavIcons";
 import ChatBox from "../../components/ChatBox/ChatBox";
 
 const Chat = () => {
@@ -49,17 +45,10 @@ const Chat = () => {
 
             {/*Right Side*/}
             <div className="Right-side-chat">
-                <div style={{width: '20rem', alignSelf: 'flex-end'}}>
-                    <div className="navIcons">
-                        <Link to='../home'>
-                            <img src={Home} alt="" />
-                        </Link>
-                        <UilSetting/>
-                        <img src={Noti} alt=""/>
-                        <img src={Comment} alt=""/>
-                    </div>
-                    <ChatBox chat={currentChat} currentUserId={user._id}/>
+                <div style={{width:'20rem', alignSelf:'flex-end'}}>
+                    <NavIcons />
                 </div>
+                <ChatBox chat={currentChat} currentUserId={user._id}/>
             </div>
         </div>
     )

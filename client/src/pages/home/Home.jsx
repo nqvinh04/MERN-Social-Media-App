@@ -8,9 +8,9 @@ const Home = () => {
     return (
         <div className="Home">
             <div/>
-            <ProfileSide/>
-            <PostSide/>
-            <RightSide/>
+                <ProfileSide/>
+                <PostSide/>
+                <RightSide/>
             <div/>
         </div>
     )
