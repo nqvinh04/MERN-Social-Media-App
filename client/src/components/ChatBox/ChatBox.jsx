@@ -1,17 +1,23 @@
 import React, {useEffect, useState} from "react";
-import { getMessage } from "../../api/MessageRequest";
+import { addMessage, getMessage } from "../../api/MessageRequest";
 import { getUser }  from "../../api/UseRequest";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 import "./ChatBox.css";
 
 
-const ChatBox = ({chat, currentUserId}) => {
+const ChatBox = ({chat, currentUserId, setSendMessage, receivedMessage}) => {
 
     const [userData, setUserData] = useState(null);
     const [messages, setMessage] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const serverPublic = 'http://localhost:5001/images/';
+
+    useEffect(() => {
+        if (receivedMessage !== null && receivedMessage.chatId === chat._id) {
+            setMessage([...messages, receivedMessage]);
+        }
+    }, [receivedMessage])
 
     // fetching data for header
     useEffect(() => {
@@ -58,8 +64,20 @@ const ChatBox = ({chat, currentUserId}) => {
             text: newMessage,
             chatId: chat._id,
         }
-        const receiverId = chat.member.find((id) => id === currentUserId);
-        // send message to sic
+        // const receiverId = chat.member.find((id) => id === currentUserId);
+        // send message to database
+        try {
+            const {data} = await addMessage(message);
+            setMessage([...messages, data]);
+            setNewMessage("")
+        } catch (err) {
+            console.log(err);
+        }
+
+        // send message to socket server
+        const receiverId = chat.members.find((id) => id !== currentUserId);
+        setSendMessage({...messages, receiverId});
+
     }
 
     return (
