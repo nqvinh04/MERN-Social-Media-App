@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { addMessage, getMessage } from "../../api/MessageRequest";
 import { getUser }  from "../../api/UseRequest";
 import { format } from "timeago.js";
@@ -12,6 +12,13 @@ const ChatBox = ({chat, currentUserId, setSendMessage, receivedMessage}) => {
     const [messages, setMessage] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const serverPublic = 'http://localhost:5001/images/';
+    const scroll = useRef();
+
+    useEffect(() => {
+        if (receivedMessage !== null && receivedMessage.chatId === chat._id) {
+            setMessage([...messages, receivedMessage]);
+        }
+    }, [receivedMessage]);
 
     const handleChange = (newMessage) => {
         setNewMessage(newMessage);
@@ -71,12 +78,6 @@ const ChatBox = ({chat, currentUserId, setSendMessage, receivedMessage}) => {
 
     }
 
-    useEffect(() => {
-        if (receivedMessage !== null && receivedMessage.chatId === chat._id) {
-            setMessage([...messages, receivedMessage]);
-        }
-    }, [receivedMessage])
-
     return (
         <>
             <div className="ChatBox-container">
@@ -112,7 +113,12 @@ const ChatBox = ({chat, currentUserId, setSendMessage, receivedMessage}) => {
                         <div className="chat-body">
                             {messages.map((message) => (
                                 <>
-                                    <div className={message.senderId === currentUserId ? "message own" : "message"}>
+                                    <div
+                                        ref = {scroll} 
+                                        className={message.senderId === currentUserId 
+                                        ? "message own" 
+                                        : "message"}
+                                    >
                                         <span>{message.text}</span>{" "}
                                         <span>{format(message.createdAt)}</span>
                                     </div>

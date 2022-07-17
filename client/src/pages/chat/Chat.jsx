@@ -17,8 +17,6 @@ const Chat = () => {
     const [sendMessage, setSendMessage] = useState(null);
     const [receivedMessage, setReceivedMessage] = useState(null);
 
-    console.log('test socket connection', socket);
-
     useEffect(() => {
         const getChats = async () => {
             try {
@@ -52,10 +50,8 @@ const Chat = () => {
         socket.current.on("receive-message", (data) => {
             console.log(data)
             setReceivedMessage(data);
-        }
-    
-        );
-      }, []);
+        });
+    }, []);
 
     return (
         <div className="Chat">
