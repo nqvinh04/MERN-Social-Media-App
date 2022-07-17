@@ -15,33 +15,9 @@ const Chat = () => {
     const [currentChat, setCurrentChat] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [sendMessage, setSendMessage] = useState(null);
-    const [receiveMessage, setReceiveMessage] = useState(null);
+    const [receivedMessage, setReceivedMessage] = useState(null);
 
     console.log('test socket connection', socket);
-
-    // sending message to socket server
-    useEffect(() => {
-        if (sendMessage !== null) {
-            socket.current.emit('send-message', sendMessage);
-        }
-    }, [sendMessage]);
-
-    //  receiving message from socket server
-    useEffect(() => {
-        socket.current.on('receive-message', (data) => {
-            console.log(123, data)
-            setReceiveMessage(data);
-        });
-    }, [])
-
-    useEffect(() => {
-        socket.current = io('ws://localhost:8800');
-        socket.current.emit("new-user-add", user._id);
-        socket.current.on('get-users', (users) => {
-            setOnlineUsers(users);
-            console.log(onlineUsers);
-        })
-    }, [user]);
 
     useEffect(() => {
         const getChats = async () => {
@@ -54,6 +30,32 @@ const Chat = () => {
         }
         getChats();
     }, [user._id]);
+
+    useEffect(() => {
+        socket.current = io('ws://localhost:8800');
+        socket.current.emit("new-user-add", user._id);
+        socket.current.on('get-users', (users) => {
+            setOnlineUsers(users);
+            console.log(onlineUsers);
+        })
+    }, [user]);
+
+    // sending message to socket server
+    useEffect(() => {
+        if (sendMessage !== null) {
+            socket.current.emit('send-message', sendMessage);
+        }
+    }, [sendMessage]);
+
+    //  receiving message from socket server
+    useEffect(() => {
+        socket.current.on("receive-message", (data) => {
+            console.log(data)
+            setReceivedMessage(data);
+        }
+    
+        );
+      }, []);
 
     return (
         <div className="Chat">
@@ -83,7 +85,7 @@ const Chat = () => {
                     chat={currentChat} 
                     currentUserId={user._id} 
                     setSendMessage={setSendMessage}
-                    receiveMessage={receiveMessage}
+                    receivedMessage={receivedMessage}
                 />
             </div>
         </div>
