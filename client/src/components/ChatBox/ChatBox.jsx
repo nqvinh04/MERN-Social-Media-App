@@ -13,11 +13,9 @@ const ChatBox = ({chat, currentUserId, setSendMessage, receivedMessage}) => {
     const [newMessage, setNewMessage] = useState("");
     const serverPublic = 'http://localhost:5001/images/';
 
-    useEffect(() => {
-        if (receivedMessage !== null && receivedMessage.chatId === chat._id) {
-            setMessage([...messages, receivedMessage]);
-        }
-    }, [receivedMessage])
+    const handleChange = (newMessage) => {
+        setNewMessage(newMessage);
+    }
 
     // fetching data for header
     useEffect(() => {
@@ -36,13 +34,10 @@ const ChatBox = ({chat, currentUserId, setSendMessage, receivedMessage}) => {
         }
     }, [chat, currentUserId]);
 
-    
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                console.log('Chat', chat)
                 const {data} = await getMessage(chat._id);
-                console.log(123321, data)
                 setMessage(data);
             } catch (error) {
                 console.log('Message error', error)
@@ -52,10 +47,6 @@ const ChatBox = ({chat, currentUserId, setSendMessage, receivedMessage}) => {
             fetchMessages();
         }
     }, [chat]);
-
-    const handleChange = (newMessage) => {
-        setNewMessage(newMessage);
-    }
 
     const handleSend = async(e) => {
         e.preventDefault();
@@ -79,6 +70,12 @@ const ChatBox = ({chat, currentUserId, setSendMessage, receivedMessage}) => {
         setSendMessage({...messages, receiverId});
 
     }
+
+    useEffect(() => {
+        if (receivedMessage !== null && receivedMessage.chatId === chat._id) {
+            setMessage([...messages, receivedMessage]);
+        }
+    }, [receivedMessage])
 
     return (
         <>
